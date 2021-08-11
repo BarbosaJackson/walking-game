@@ -10,7 +10,57 @@ function setup() {
 }
 
 
-function draw() {
-	background(89, 182, 91);
-	this.game.drawMap();
+async function draw() {
+	await this.game.drawMap();
 }
+
+
+function keyReleased() {
+   const keyName = event.key;
+   let dx = 0, dy = 0, arrow = '0';
+   if(keyName == 'ArrowUp') {
+   	if(this.game.x) {
+   		dx = -1;
+   	}
+   } else if(keyName == 'ArrowDown') {
+   	if(this.game.x + 1 < this.game.n) {
+   		dx = 1;
+   	}
+   } else if(keyName == 'ArrowRight'){
+   	if(this.game.y + 1 < this.game.m) {
+   		dy = 1;
+   	}
+   } else if(keyName == 'ArrowLeft') {
+   	if(this.game.y) {
+   		dy = -1;
+   	}
+   }
+   if(dx || dy) {
+   	this.game.update(dx, dy);
+   }
+}
+
+// document.addEventListener('keydown', (event) => {
+//   const keyName = event.key;
+//   let dx = 0, dy = 0;
+//   if(keyName == 'ArrowUp') {
+//   	if(this.game.x) {
+// 		dx = -1;
+//   	}
+//   } else if(keyName == 'ArrowDown') {
+//   	if(this.game.x + 1 < this.game.n) {
+//   		dx = 1;
+//   	}
+//   } else if(keyName == 'ArrowRight'){
+//   	if(this.game.y + 1 < this.game.m) {
+//   		dy = 1;
+//   	}
+//   } else if(keyName == 'ArrowLeft') {
+//   	if(this.game.y) {
+//   		dy = -1;
+//   	}
+//   }
+//   if(dx || dy) {
+// 		this.game.update(dx, dy);
+//   }
+// });
